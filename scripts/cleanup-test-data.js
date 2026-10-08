@@ -17,9 +17,9 @@ const mysql = require('mysql2/promise');
   });
 
   try {
-    // Solo toca usuarios de prueba (correo test-…@evieland.dev)
+    // Solo toca usuarios de prueba (test-… y svl-… de los scripts de verificación)
     const [users] = await conn.query(
-      "SELECT id, email FROM users WHERE email LIKE 'test-%@evieland.dev'"
+      "SELECT id, email FROM users WHERE email LIKE 'test-%@evieland.dev' OR email LIKE 'svl-%@evieland.dev'"
     );
     if (!users.length) {
       console.log('No hay usuarios de prueba que limpiar.');
