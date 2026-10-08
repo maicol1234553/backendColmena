@@ -1,0 +1,18 @@
+# Dependencias
+/node_modules
+
+# Credenciales — NUNCA commitear
+.env
+.env.*
+!.env.example
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+.idea/
+.vscode/
+
+# Artefactos de pruebas
+scripts/export-test.xlsx
