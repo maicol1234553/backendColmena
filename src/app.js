@@ -17,7 +17,22 @@ const { notFound, errorHandler } = require('./middleware/error');
 const app = express();
 
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_ORIGIN?.split(',') ?? '*', credentials: true }));
+const allowedOrigins = (process.env.CLIENT_ORIGIN ?? '*')
+  .split(',')
+  .map((o) => o.trim());
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json({ limit: '256kb' }));
 app.use(morgan('dev'));
 
