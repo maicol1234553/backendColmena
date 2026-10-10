@@ -17,29 +17,8 @@ const { notFound, errorHandler } = require('./middleware/error');
 const app = express();
 
 app.use(helmet());
-const allowedOrigins = (process.env.CLIENT_ORIGIN ?? '*')
-  .split(',')
-  .map((o) => o.trim());
-
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })
-);
-
-// Manejo explícito de preflight OPTIONS
-app.options('*', (_req, res) => {
-  res.sendStatus(204);
-});
+app.use(cors({ origin: 'https://colmena-ecru.vercel.app', credentials: true }));
+app.options('*', cors());
 app.use(express.json({ limit: '256kb' }));
 app.use(morgan('dev'));
 
