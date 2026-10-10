@@ -2,11 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "builds": [
     {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "src/**/*.js",
+      "src": "api/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -28,7 +24,7 @@
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "https://colmena-ecru.vercel.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
-        { "key": "Allow-Control-Allow-Headers", "value": "Content-Type,Authorization" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type,Authorization" },
         { "key": "Access-Control-Allow-Credentials", "value": "true" }
       ]
     }
